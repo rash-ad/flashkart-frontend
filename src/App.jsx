@@ -7,13 +7,16 @@ import { GiOpenFolder } from "react-icons/gi";
 import { IoIosFlash } from "react-icons/io";
 import { HiMenu, HiX } from "react-icons/hi";
 import Cart from "./components/navbar/cart/Cart";
-import Home from "./pages/home";
-
+import Hero from "./components/hero/Hero";
+import CategoryCards from "./components/category/CategoryCards";
 function App() {
   return (
   
     <div className="App">
       <Navbar />
+
+  <Hero/>
+  <CategoryCards/>
       
       
     </div>
