@@ -1,25 +1,25 @@
-# ⚡ FlashKart — eCommerce Backend API
+# ⚡ FlashKart — React.js eCommerce Frontend
 
-> A robust REST API backend for the **FlashKart** eCommerce platform, built with **Node.js**, **Express.js**, and designed to power a React.js storefront with full product, cart, order, and user management.
+> A fast, modern eCommerce storefront built with **React.js**, connected to the FlashKart backend API. Features product browsing, cart management, user authentication, and order tracking.
 
-![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express.js-4.x-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-7.x-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-Auth-FB015B?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux_Toolkit-2.x-764ABC?style=for-the-badge&logo=redux&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ---
 
 ## ✨ Features
 
-- 🔐 **JWT Authentication** — Secure register, login, and token-based auth
-- 🛍️ **Product Management** — CRUD for products with categories, images & stock
-- 🛒 **Cart API** — Add, update, remove items per user session
-- 📦 **Order Processing** — Place orders, track status, order history
-- 👤 **User Profiles** — Manage account details and addresses
-- 🔧 **Admin Routes** — Protected routes for managing the entire store
-- 📄 **Pagination & Filtering** — Search, sort, and filter products efficiently
-- 🌐 **CORS Ready** — Pre-configured for React.js frontend integration
+- 🏠 **Home Page** — Hero banner, featured products, categories
+- 🛍️ **Product Listing** — Search, filter by category, sort by price
+- 📄 **Product Detail** — Images, description, reviews, add to cart
+- 🛒 **Shopping Cart** — Real-time cart with quantity controls
+- 🔐 **Auth Pages** — Login & Register with JWT token storage
+- 👤 **User Profile** — Edit account info, view order history
+- 📦 **Order Tracking** — View placed orders and their status
+- 📱 **Fully Responsive** — Works on mobile, tablet, and desktop
 
 ---
 
@@ -27,63 +27,66 @@
 
 | Tech | Purpose |
 |------|---------|
-| Node.js | Runtime environment |
-| Express.js | Web framework |
-| MongoDB + Mongoose | Database & ODM |
-| JSON Web Tokens (JWT) | Authentication |
-| bcryptjs | Password hashing |
-| Multer | File/image uploads |
-| dotenv | Environment config |
-| express-validator | Input validation |
-| Morgan | HTTP request logging |
+| React.js 18 | UI framework |
+| Vite | Build tool & dev server |
+| React Router DOM v6 | Client-side routing |
+| Redux Toolkit | Global state (cart, auth) |
+| Axios | API calls to backend |
+| Tailwind CSS | Styling |
+| React Toastify | Notifications |
+| React Icons | Icon library |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-flashkart-backend/
+flashkart-frontend/
+│
+├── public/
+│   └── logo.png
 │
 ├── src/
-│   ├── config/
-│   │   └── db.js               # MongoDB connection
+│   ├── api/
+│   │   └── axios.js            # Axios instance with base URL
 │   │
-│   ├── controllers/
-│   │   ├── auth.controller.js
-│   │   ├── product.controller.js
-│   │   ├── cart.controller.js
-│   │   ├── order.controller.js
-│   │   └── user.controller.js
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Footer.jsx
+│   │   ├── ProductCard.jsx
+│   │   ├── CartItem.jsx
+│   │   └── Loader.jsx
 │   │
-│   ├── middleware/
-│   │   ├── auth.middleware.js   # JWT verification
-│   │   ├── admin.middleware.js  # Admin role check
-│   │   └── error.middleware.js  # Global error handler
+│   ├── pages/
+│   │   ├── Home.jsx
+│   │   ├── Products.jsx
+│   │   ├── ProductDetail.jsx
+│   │   ├── Cart.jsx
+│   │   ├── Checkout.jsx
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── Profile.jsx
+│   │   └── Orders.jsx
 │   │
-│   ├── models/
-│   │   ├── User.model.js
-│   │   ├── Product.model.js
-│   │   ├── Cart.model.js
-│   │   └── Order.model.js
-│   │
-│   ├── routes/
-│   │   ├── auth.routes.js
-│   │   ├── product.routes.js
-│   │   ├── cart.routes.js
-│   │   ├── order.routes.js
-│   │   └── user.routes.js
+│   ├── redux/
+│   │   ├── store.js
+│   │   ├── cartSlice.js
+│   │   └── authSlice.js
 │   │
 │   ├── utils/
-│   │   ├── generateToken.js
-│   │   └── apiResponse.js
+│   │   └── helpers.js
 │   │
-│   └── app.js                  # Express app setup
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
 │
-├── uploads/                    # Product image storage
 ├── .env.example
 ├── .gitignore
+├── index.html
 ├── package.json
-└── server.js                   # Entry point
+├── tailwind.config.js
+├── vite.config.js
+└── README.md
 ```
 
 ---
@@ -93,16 +96,15 @@ flashkart-backend/
 ### Prerequisites
 
 - Node.js `v18+`
-- MongoDB (local or [MongoDB Atlas](https://www.mongodb.com/atlas))
-- npm or yarn
+- FlashKart backend running at `http://localhost:5000`
 
 ---
 
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/flashkart-backend.git
-cd flashkart-backend
+git clone https://github.com/your-username/flashkart-frontend.git
+cd flashkart-frontend
 ```
 
 ### 2️⃣ Install Dependencies
@@ -117,167 +119,79 @@ npm install
 cp .env.example .env
 ```
 
-Edit `.env` with your values:
+Edit `.env`:
 
 ```env
-PORT=5000
-NODE_ENV=development
-
-MONGO_URI=mongodb://localhost:27017/flashkart
-
-JWT_SECRET=your_super_secret_key
-JWT_EXPIRES_IN=7d
-
-CLIENT_URL=http://localhost:5173
+VITE_API_BASE_URL=http://localhost:5000/api
 ```
 
-### 4️⃣ Run the Server
+### 4️⃣ Start the Dev Server
 
 ```bash
-# Development (with auto-reload)
 npm run dev
-
-# Production
-npm start
 ```
 
-API running at: `http://localhost:5000/api`
+App running at: `http://localhost:5173`
 
 ---
 
-## 📡 API Reference
+## 🔗 Backend Connection
 
-### 🔐 Auth
+This frontend connects to the **FlashKart Backend API**.
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/auth/register` | Register new user | ❌ |
-| POST | `/api/auth/login` | Login, returns JWT | ❌ |
-| GET | `/api/auth/me` | Get current user | ✅ |
-| POST | `/api/auth/logout` | Logout user | ✅ |
+> 👉 Backend repo: [flashkart-backend](https://github.com/your-username/flashkart-backend)
+
+Make sure the backend is running before starting the frontend.
 
 ---
 
-### 🛍️ Products
+## 📜 Available Scripts
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/products` | Get all products (paginated) | ❌ |
-| GET | `/api/products/:id` | Get single product | ❌ |
-| GET | `/api/products/search?q=` | Search products | ❌ |
-| POST | `/api/products` | Create product | ✅ Admin |
-| PUT | `/api/products/:id` | Update product | ✅ Admin |
-| DELETE | `/api/products/:id` | Delete product | ✅ Admin |
-
----
-
-### 🛒 Cart
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/cart` | Get user's cart | ✅ |
-| POST | `/api/cart/add` | Add item to cart | ✅ |
-| PUT | `/api/cart/update/:itemId` | Update item quantity | ✅ |
-| DELETE | `/api/cart/remove/:itemId` | Remove item from cart | ✅ |
-| DELETE | `/api/cart/clear` | Clear entire cart | ✅ |
-
----
-
-### 📦 Orders
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/orders` | Place a new order | ✅ |
-| GET | `/api/orders/my` | Get logged-in user's orders | ✅ |
-| GET | `/api/orders/:id` | Get order by ID | ✅ |
-| GET | `/api/orders` | Get all orders | ✅ Admin |
-| PUT | `/api/orders/:id/status` | Update order status | ✅ Admin |
-
----
-
-### 👤 Users
-
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/users/profile` | Get user profile | ✅ |
-| PUT | `/api/users/profile` | Update profile | ✅ |
-| PUT | `/api/users/change-password` | Change password | ✅ |
-| GET | `/api/users` | Get all users | ✅ Admin |
-| DELETE | `/api/users/:id` | Delete user | ✅ Admin |
-
----
-
-## 🔒 Authentication
-
-All protected routes require a `Bearer` token in the `Authorization` header:
-
-```
-Authorization: Bearer <your_jwt_token>
-```
-
-Example with Axios in your React frontend:
-
-```js
-axios.get('/api/cart', {
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem('token')}`
-  }
-});
+```bash
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run preview    # Preview production build
+npm run lint       # Run ESLint
 ```
 
 ---
 
-## 🌐 CORS Configuration
+## 🗂️ Pages & Routes
 
-The backend is pre-configured to accept requests from your React frontend. Update `CLIENT_URL` in `.env` to match your frontend URL:
+| Route | Page | Auth Required |
+|-------|------|--------------|
+| `/` | Home | ❌ |
+| `/products` | Product Listing | ❌ |
+| `/products/:id` | Product Detail | ❌ |
+| `/cart` | Shopping Cart | ✅ |
+| `/checkout` | Checkout | ✅ |
+| `/login` | Login | ❌ |
+| `/register` | Register | ❌ |
+| `/profile` | User Profile | ✅ |
+| `/orders` | Order History | ✅ |
 
-```env
-CLIENT_URL=http://localhost:5173   # Vite dev server
-# or
-CLIENT_URL=https://flashkart.vercel.app  # Production
+---
+
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+```bash
+npm run build
 ```
 
----
-
-## 📦 Sample API Response
-
-```json
-{
-  "success": true,
-  "message": "Products fetched successfully",
-  "data": {
-    "products": [...],
-    "total": 48,
-    "page": 1,
-    "pages": 5
-  }
-}
-```
-
----
-
-## 🧪 Testing the API
-
-Use [Postman](https://www.postman.com/) or [Thunder Client](https://www.thunderclient.com/) (VS Code extension).
-
----
-
-## 🚢 Deployment
-
-### Deploy to Render / Railway
-
-1. Push your code to GitHub
-2. Connect the repo to [Render](https://render.com) or [Railway](https://railway.app)
-3. Set all environment variables in the dashboard
-4. Set start command: `node server.js`
+1. Push to GitHub
+2. Import repo on [Vercel](https://vercel.com)
+3. Set environment variable: `VITE_API_BASE_URL=https://your-backend-url.com/api`
+4. Deploy ✅
 
 ---
 
 ## 🤝 Contributing
 
 1. Fork the repo
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit changes: `git commit -m "Add your feature"`
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit: `git commit -m "Add your feature"`
 4. Push: `git push origin feature/your-feature`
 5. Open a Pull Request
 
@@ -285,7 +199,7 @@ Use [Postman](https://www.postman.com/) or [Thunder Client](https://www.thunderc
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+Licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
 
 ---
 
@@ -297,4 +211,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-> ⚡ Built with passion for FlashKart — fast, reliable, scalable.
+> ⚡ FlashKart Frontend — Shop fast, shop smart.
